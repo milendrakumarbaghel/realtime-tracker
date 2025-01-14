@@ -14,6 +14,9 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public"))); // Correct usage of path
 
 io.on('connection', function(socket) {
+    socket.on('send-location', function (data) {
+        io.emit("recieve-location", {id: socket.id, ...data});
+    });
     console.log("connected");
 });
 
